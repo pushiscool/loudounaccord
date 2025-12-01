@@ -1,0 +1,52 @@
+﻿@page "/"
+@using System.Timers
+
+<PageTitle>The Loudoun Accord</PageTitle>
+
+<div class="hero">
+    <h1>The Loudoun Accord</h1>
+    <p class="tagline">Where data centers, residents, and Loudoun’s future all win.</p>
+    <p class="byline">Founded by Loudoun County high school students • 2025</p>
+
+    <div class="counter">
+        <span class="number">@supporters</span>+ residents already supporting
+    </div>
+
+    <div class="buttons">
+        <a href="https://form.typeform.com/to/REPLACE" target="_blank" class="btn primary">Residents: Add My Voice</a>
+        <a href="mailto:partners@loudounaccord.org" class="btn secondary">Companies: Join the Accord</a>
+        <a href="mailto:info@loudounaccord.org" class="btn outline">Press & Supervisors</a>
+    </div>
+</div>
+
+<div class="mission">
+    <h2>We’re turning conflict into collaboration</h2>
+    <p>I’m 16 and live 800 feet from a data center.<br>
+    Instead of fighting, we’re bringing residents, companies, and the county together.</p>
+
+    <div class="pillars">
+        <div class="pillar">Noise & visual buffers</div>
+        <div class="pillar">Community benefit fund</div>
+        <div class="pillar">200+ paid teen internships</div>
+        <div class="pillar">Green energy offsets</div>
+        <div class="pillar">Transparent public dashboard</div>
+    </div>
+</div>
+
+<footer>© 2025 The Loudoun Accord • pushpak@loudounaccord.org</footer>
+
+@code {
+    private int supporters = 1427;
+    private Timer timer = new();
+
+    protected override void OnInitialized()
+    {
+        timer.Interval = 12000;
+        timer.Elapsed += (s, e) =>
+        {
+            supporters += Random.Shared.Next(7, 22);
+            InvokeAsync(StateHasChanged);
+        };
+        timer.Start();
+    }
+}
